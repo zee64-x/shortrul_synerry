@@ -3,7 +3,6 @@ const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
 const urlRoutes = require('./routes/urls');
-const Url = require('./models/Url');
 
 const app = express();
 
@@ -21,10 +20,8 @@ app.use(cors({
 }));
 app.use(express.json());
 
-// Routes
 app.use('/api', urlRoutes);
 
-// Redirect route สำหรับ short URL
 app.get('/s/:shortCode', async (req, res) => {
   try {
     const url = await Url.findOne({ shortCode: req.params.shortCode });
@@ -45,7 +42,6 @@ app.get('/s/:shortCode', async (req, res) => {
   }
 });
 
-// Health check
 app.get('/', (req, res) => {
   res.json({ message: 'URL Shortener API is running' });
 });
@@ -55,5 +51,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-module.exports = app;

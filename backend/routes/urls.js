@@ -8,8 +8,6 @@ const Url = require('../models/Url');
 router.post('/shorten', async (req, res) => {
   try {
     const { originalUrl } = req.body;
-
-    // ตรวจสอบว่ามี URL นี้อยู่แล้วหรือไม่
     let url = await Url.findOne({ originalUrl });
 
     if (url) {
@@ -20,11 +18,7 @@ router.post('/shorten', async (req, res) => {
     const shortCode = shortid.generate();
     const baseUrl = process.env.BASE_URL || 'https://shortrul-synerry.onrender.com';
     const shortUrl = `${baseUrl}/s/${shortCode}`;
-
-    // สร้าง QR Code
     const qrCode = await QRCode.toDataURL(shortUrl);
-
-    // บันทึกลงฐานข้อมูล
     url = new Url({
       originalUrl,
       shortCode,
@@ -40,8 +34,6 @@ router.post('/shorten', async (req, res) => {
     res.status(500).json({ error: 'Server Error' });
   }
 });
-
-// ดึงรายการ URL ทั้งหมด
 router.get('/urls', async (req, res) => {
   try {
     const urls = await Url.find().sort({ createdAt: -1 });
@@ -51,8 +43,6 @@ router.get('/urls', async (req, res) => {
     res.status(500).json({ error: 'Server Error' });
   }
 });
-
-// ดึงข้อมูลสถิติ
 router.get('/stats', async (req, res) => {
   try {
     const totalUrls = await Url.countDocuments();
@@ -72,8 +62,6 @@ router.get('/stats', async (req, res) => {
     res.status(500).json({ error: 'Server Error' });
   }
 });
-
-// ลบ URL
 router.delete('/urls/:id', async (req, res) => {
   try {
     await Url.findByIdAndDelete(req.params.id);

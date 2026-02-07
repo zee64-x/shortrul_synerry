@@ -4,7 +4,7 @@ import axiosInstance from '../api/axiosConfig';
 const UrlList = () => {
   const [urls, setUrls] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState('');
+  const [error] = useState('');
 
   useEffect(() => {
     fetchUrls();
