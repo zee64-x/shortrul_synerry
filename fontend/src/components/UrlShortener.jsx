@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axiosInstance from '../api/axiosConfig';
 
 const UrlShortener = () => {
   const [originalUrl, setOriginalUrl] = useState('');
@@ -28,7 +28,7 @@ const UrlShortener = () => {
     setLoading(true);
 
     try {
-      const response = await axios.post('/api/shorten', { originalUrl });
+      const response = await axiosInstance.post('/api/shorten', { originalUrl });
       setResult(response.data);
       setOriginalUrl('');
     } catch (err) {

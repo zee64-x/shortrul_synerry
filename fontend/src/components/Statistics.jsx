@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../api/axiosConfig';
 
 const Statistics = () => {
   const [stats, setStats] = useState(null);
@@ -12,7 +12,7 @@ const Statistics = () => {
 
   const fetchStats = async () => {
     try {
-      const response = await axios.get('/api/stats');
+      const response = await axiosInstance.get('/api/stats');
       setStats(response.data);
       setLoading(false);
     } catch (err) {

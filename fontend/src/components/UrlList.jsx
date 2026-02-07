@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import axiosInstance from '../api/axiosConfig';
 
 const UrlList = () => {
   const [urls, setUrls] = useState([]);
@@ -12,7 +12,7 @@ const UrlList = () => {
 
   const fetchUrls = async () => {
     try {
-      const response = await axios.get('/api/urls');
+      const response = await axiosInstance.get('/api/urls');
       setUrls(response.data);
       setLoading(false);
     } catch (err) {
@@ -26,7 +26,7 @@ const UrlList = () => {
     if (!window.confirm('คุณต้องการลบ URL นี้หรือไม่?')) return;
 
     try {
-      await axios.delete(`/api/urls/${id}`);
+      await axiosInstance.delete(`/api/urls/${id}`);
       setUrls(urls.filter(url => url._id !== id));
     } catch (err) {
       alert('ไม่สามารถลบได้');
