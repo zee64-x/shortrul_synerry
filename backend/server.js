@@ -10,8 +10,15 @@ const app = express();
 // เชื่อมต่อฐานข้อมูล
 connectDB();
 
-// Middleware
-app.use(cors());
+// Middleware - แก้ตรงนี้
+app.use(cors({
+  origin: [
+    'http://localhost:5000',
+    'http://localhost:5173',
+    'https://shortrul-synerry.vercel.app'  // เพิ่มบรรทัดนี้
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Routes
