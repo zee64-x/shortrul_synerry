@@ -8,7 +8,7 @@ function App() {
 
   return (
     <div className="container">
-      <h1>🔗 ระบบย่อ URL</h1>
+      <h1>SHORT URL</h1>
       
       <div className="tabs">
         <button 
