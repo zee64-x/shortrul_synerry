@@ -25,7 +25,7 @@ app.use(express.json());
 app.use('/api', urlRoutes);
 
 // Redirect route สำหรับ short URL
-app.get('/:shortCode', async (req, res) => {
+app.get('/s/:shortCode', async (req, res) => {
   try {
     const url = await Url.findOne({ shortCode: req.params.shortCode });
 

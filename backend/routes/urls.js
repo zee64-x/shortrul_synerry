@@ -18,7 +18,7 @@ router.post('/shorten', async (req, res) => {
 
     // สร้าง short code
     const shortCode = shortid.generate();
-    const shortUrl = `${process.env.BASE_URL}/${shortCode}`;
+    const shortUrl = `${process.env.BASE_URL}/s/${shortCode}`;
 
     // สร้าง QR Code
     const qrCode = await QRCode.toDataURL(shortUrl);
