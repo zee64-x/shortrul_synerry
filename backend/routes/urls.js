@@ -18,7 +18,8 @@ router.post('/shorten', async (req, res) => {
 
     // สร้าง short code
     const shortCode = shortid.generate();
-    const shortUrl = `${process.env.BASE_URL}/s/${shortCode}`;
+    const baseUrl = process.env.BASE_URL || 'https://shortrul-synerry.onrender.com';
+    const shortUrl = `${baseUrl}/s/${shortCode}`;
 
     // สร้าง QR Code
     const qrCode = await QRCode.toDataURL(shortUrl);
